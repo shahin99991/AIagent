@@ -1,0 +1,425 @@
+:root {
+    --primary-color: #007bff;
+    --secondary-color: #6c757d;
+    --background-color: #f8f9fa;
+    --chat-bg: #ffffff;
+    --text-color: #212529;
+    --border-color: #dee2e6;
+    --message-user-bg: #e9ecef;
+    --message-ai-bg: #f8f9fa;
+    --shadow-color: rgba(0, 0, 0, 0.1);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Noto Sans JP', sans-serif;
+    background-color: var(--background-color);
+    color: var(--text-color);
+    line-height: 1.6;
+}
+
+.chat-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    background-color: var(--chat-bg);
+    box-shadow: 0 0 20px var(--shadow-color);
+}
+
+.chat-header {
+    padding: 1rem;
+    background-color: var(--primary-color);
+    color: white;
+    text-align: center;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.chat-header h1 {
+    font-size: 1.5rem;
+    font-weight: 500;
+}
+
+.chat-messages {
+    flex: 1;
+    overflow-y: auto;
+    padding: 1rem;
+}
+
+.message {
+    margin-bottom: 1rem;
+    padding: 1rem;
+    border-radius: 8px;
+    max-width: 80%;
+}
+
+.message.user {
+    background-color: var(--message-user-bg);
+    margin-left: auto;
+}
+
+.message.ai {
+    background-color: var(--message-ai-bg);
+    margin-right: auto;
+}
+
+.chat-input-container {
+    padding: 1rem;
+    border-top: 1px solid var(--border-color);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.image-upload-container {
+    display: flex;
+    align-items: center;
+}
+
+.image-upload-label {
+    cursor: pointer;
+    padding: 0.5rem;
+    display: flex;
+    align-items: center;
+    color: var(--secondary-color);
+    transition: color 0.3s ease;
+}
+
+.image-upload-label:hover {
+    color: var(--primary-color);
+}
+
+textarea {
+    flex: 1;
+    padding: 0.75rem;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    resize: none;
+    font-family: inherit;
+    font-size: 1rem;
+    line-height: 1.5;
+    max-height: 100px;
+    overflow-y: auto;
+}
+
+textarea:focus {
+    outline: none;
+    border-color: var(--primary-color);
+}
+
+#send-button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: var(--secondary-color);
+    padding: 0.5rem;
+    display: flex;
+    align-items: center;
+    transition: color 0.3s ease;
+}
+
+#send-button:hover {
+    color: var(--primary-color);
+}
+
+.message img {
+    max-width: 100%;
+    border-radius: 4px;
+    margin-top: 0.5rem;
+}
+
+@media (max-width: 768px) {
+    .chat-container {
+        height: 100vh;
+        max-width: 100%;
+    }
+
+    .message {
+        max-width: 90%;
+    }
+}
+
+/* ヘッダー */
+.chat-header {
+    padding: 1rem;
+    background-color: #007bff;
+    color: white;
+    text-align: center;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* メッセージエリア */
+.chat-messages {
+    flex: 1;
+    overflow-y: auto;
+    padding: 1rem;
+}
+
+.message {
+    margin-bottom: 1rem;
+    padding: 0.5rem 1rem;
+    border-radius: 1rem;
+    max-width: 70%;
+    position: relative;
+}
+
+.message.loading::after {
+    content: "...";
+    animation: loading 1s infinite;
+}
+
+.user-message {
+    background-color: #007bff;
+    color: white;
+    margin-left: auto;
+}
+
+.ai-message {
+    background-color: #e9ecef;
+    color: black;
+    margin-right: auto;
+}
+
+/* 入力エリア */
+.chat-input {
+    padding: 1rem;
+    border-top: 1px solid #dee2e6;
+    background-color: white;
+}
+
+.input-form {
+    display: flex;
+    gap: 0.5rem;
+    flex-direction: column;
+}
+
+.input-row {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.message-input {
+    flex: 1;
+    padding: 0.5rem;
+    border: 1px solid #dee2e6;
+    border-radius: 0.25rem;
+    font-size: 1rem;
+    min-height: 2.5rem;
+    resize: vertical;
+}
+
+.send-button {
+    padding: 0.5rem 1rem;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 0.25rem;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.send-button:hover {
+    background-color: #0056b3;
+}
+
+/* 画像アップロード */
+.image-upload {
+    display: none;
+}
+
+.image-preview {
+    max-width: 200px;
+    max-height: 200px;
+    margin-top: 0.5rem;
+    display: none;
+    border-radius: 0.25rem;
+}
+
+.preview-container {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-top: 0.5rem;
+}
+
+.remove-image {
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    border-radius: 0.25rem;
+    padding: 0.25rem 0.5rem;
+    cursor: pointer;
+    display: none;
+    transition: background-color 0.2s;
+}
+
+.remove-image:hover {
+    background-color: #c82333;
+}
+
+/* ツールバー */
+.toolbar {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.toolbar-button {
+    padding: 0.5rem;
+    background-color: rgba(255, 255, 255, 0.2);
+    border: none;
+    border-radius: 0.25rem;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.toolbar-button:hover {
+    background-color: rgba(255, 255, 255, 0.3);
+}
+
+/* ローディングアニメーション */
+@keyframes loading {
+    0% { content: "."; }
+    33% { content: ".."; }
+    66% { content: "..."; }
+}
+
+.loading-indicator {
+    display: none;
+    position: absolute;
+    bottom: -20px;
+    left: 10px;
+    font-size: 12px;
+    color: #666;
+}
+
+.loading .loading-indicator {
+    display: block;
+}
+
+/* マークダウンプレビュー用のスタイル */
+.markdown-preview {
+    flex: 1;
+    padding: 0.5rem;
+    border: 1px solid #dee2e6;
+    border-radius: 0.25rem;
+    background-color: #f8f9fa;
+    min-height: 2.5rem;
+    overflow-y: auto;
+}
+
+.preview-button {
+    padding: 0.5rem;
+    background-color: #6c757d;
+    color: white;
+    border: none;
+    border-radius: 0.25rem;
+    cursor: pointer;
+    flex-shrink: 0;
+    transition: background-color 0.2s;
+}
+
+.preview-button:hover {
+    background-color: #5a6268;
+}
+
+/* マークダウンコンテンツのスタイル */
+.message pre {
+    background-color: #f8f9fa;
+    padding: 1rem;
+    border-radius: 0.5rem;
+    overflow-x: auto;
+    margin: 0.5rem 0;
+}
+
+.message code {
+    font-family: 'Courier New', Courier, monospace;
+    background-color: rgba(0, 0, 0, 0.1);
+    padding: 0.2rem 0.4rem;
+    border-radius: 0.25rem;
+}
+
+.message pre code {
+    background-color: transparent;
+    padding: 0;
+}
+
+.message blockquote {
+    border-left: 4px solid #dee2e6;
+    margin: 0.5rem 0;
+    padding-left: 1rem;
+    color: #6c757d;
+}
+
+.message table {
+    border-collapse: collapse;
+    width: 100%;
+    margin: 0.5rem 0;
+}
+
+.message th,
+.message td {
+    border: 1px solid #dee2e6;
+    padding: 0.5rem;
+}
+
+.message th {
+    background-color: #f8f9fa;
+}
+
+/* マークダウンリンクのスタイル */
+.message a {
+    color: #007bff;
+    text-decoration: none;
+    transition: color 0.2s;
+}
+
+.message a:hover {
+    color: #0056b3;
+    text-decoration: underline;
+}
+
+/* マークダウンリストのスタイル */
+.message ul,
+.message ol {
+    margin: 0.5rem 0;
+    padding-left: 1.5rem;
+}
+
+.message li {
+    margin: 0.25rem 0;
+}
+
+/* マークダウン見出しのスタイル */
+.message h1,
+.message h2,
+.message h3,
+.message h4,
+.message h5,
+.message h6 {
+    margin: 1rem 0 0.5rem;
+    line-height: 1.2;
+}
+
+.message h1 { font-size: 2em; }
+.message h2 { font-size: 1.5em; }
+.message h3 { font-size: 1.17em; }
+.message h4 { font-size: 1em; }
+.message h5 { font-size: 0.83em; }
+.message h6 { font-size: 0.67em; }
+
+/* マークダウン画像のスタイル */
+.message img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 0.25rem;
+    margin: 0.5rem 0;
+} 
